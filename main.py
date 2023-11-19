@@ -119,4 +119,5 @@ def unique_numbers(*args: Any) -> list[int | float]:
     """
 
     return sorted([i for i in set(args)
-                   if isinstance(i, int) or isinstance(i, float)])
+                   if (isinstance(i, int) or isinstance(i, float))
+                   and not isinstance(i, bool)])
