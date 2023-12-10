@@ -1,0 +1,9 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    <h1>Тут превью теста {{ test_str }}</h1>
+    <form action="{% url 'question' 0 %}" method="GET">
+        <input name="title" type="hidden" value="{{ test_str }}">
+        <button type="submit" class="btn btn-success">Начать тест</button>
+    </form>
+{% endblock %}
