@@ -36,7 +36,7 @@ class Test(models.Model):
 
 class TestsList(models.Model):
     test = models.ForeignKey(Test, null=True, on_delete=models.CASCADE)
-    grade = models.IntegerField(null=True, unique=False)
+    grade = models.IntegerField(default=0, unique=False)
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
     def __str__(self):

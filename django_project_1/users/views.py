@@ -26,6 +26,13 @@ class Register(View):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
+
+            for test in models.Test.objects.all():
+                element = models.TestsList(test=test,
+                                           user=models.User.objects.get(
+                                               username=username))
+                element.save()
+
             return redirect('home')
 
         context = {
@@ -102,10 +109,14 @@ class Test(View):
 
         if (question_id + 1 > test_data.question.count()
                 and request.POST['finish'] == '1'):
+
             expression = ((test_data.question.count()
                            - models.WrongAnswer.objects.count())
                           / test_data.question.count() * 100)
-            models.TestsList.objects.filter(user=request.user, test=test_data).update(grade=expression)
+
+            models.TestsList.objects.filter(user=request.user,
+                                            test=test_data).update(
+                grade=expression)
             models.WrongAnswer.objects.all().delete()
             return redirect('home')
 
