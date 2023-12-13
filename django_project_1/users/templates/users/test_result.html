@@ -1,0 +1,22 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    <h1>Результат тестирования: {{grade}}%</h1>
+    <br>
+    <h3>Ошибки</h3>
+    <ol>
+    {% for w in wrongs %}
+        <li>
+            <h5>Вопрос:</h5>{{ w }}
+            <br>
+            <h5>Объяснение:</h5> {{ w.explanation }}
+        </li>
+    {% endfor %}
+    </ol>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input name="title" type="hidden" value="{{ got_title }}">
+        <button name="finish" value="1">Завершить тест</button>
+    </form>
+{% endblock %}
