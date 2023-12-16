@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Вопрос {{ question_id }}</h1>
+    {{ question }}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input name="title" type="hidden" value="{{ got_title }}">
+        <ol>
+            {% for variant in question.variant.all %}
+            <li>
+                <button name="btn" value="{{ variant }}">{{ variant }}</button>
+                <br>
+                <br>
+            </li>
+            {% endfor %}
+        </ol>
+    </form>
+
+    <form action="{% url 'question' question_id %}" method="get">
+        <input name="title" type="hidden" value="{{ got_title }}">
+        <button type="submit" class="btn btn-success">Следующий вопрос</button>
+    </form>
+{% endblock %}
