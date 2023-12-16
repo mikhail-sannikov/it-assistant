@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Результат тестирования: {{grade}}%</h1>
+    <br>
+    {% if wrongs_counter == 0 %}
+        <h3>Поздравляю! Тест пройдет без ошибок 👍</h3>
+    {% elif wrongs_counter > 0 %}
+        <h3>Ошибки</h3>
+        <hr>
+        <ol>
+        {% for w in wrongs %}
+            <li>
+                <h5>Вопрос:</h5>{{ w }}
+                <br>
+                {% if w.explanation != "" %}
+                    <h5>Объяснение:</h5> {{ w.explanation }}
+                {% endif %}
+                <hr>
+            </li>
+        {% endfor %}
+        </ol>
+    {% endif %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input name="title" type="hidden" value="{{ got_title }}">
+        <button name="finish">Завершить тест</button>
+    </form>
+{% endblock %}
