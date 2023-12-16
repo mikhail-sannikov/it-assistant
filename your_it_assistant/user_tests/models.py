@@ -39,9 +39,10 @@ class TestsList(models.Model):
         return f'{self.test}'
 
 
-class WrongAnswer(models.Model):
-    wrong_answer = models.TextField()
+class Answer(models.Model):
+    answer = models.TextField()
     explanation = models.TextField()
+    right = models.BooleanField()
 
     def __str__(self):
-        return f'{self.wrong_answer}'
+        return f'{self.answer}'
