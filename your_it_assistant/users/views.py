@@ -3,9 +3,9 @@ from django.shortcuts import render, redirect
 from django.views import View, generic
 
 from users.forms import UserCreationForm
-from . import models
 
-from user_tests.models import TestsList
+from user_tests.models import Test, TestsList
+from .models import User
 
 
 class Register(View):
@@ -29,10 +29,8 @@ class Register(View):
             user = authenticate(username=username, password=password)
             login(request, user)
 
-            for test in models.Test.objects.all():
-                element = models.TestsList(test=test,
-                                           user=models.User.objects.get(
-                                               username=username))
+            for test in Test.objects.all():
+                element = TestsList(test=test, user=User.objects.get(username=username))
                 element.save()
 
             return redirect('home')
