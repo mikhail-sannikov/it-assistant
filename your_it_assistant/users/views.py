@@ -30,7 +30,9 @@ class Register(View):
             login(request, user)
 
             for test in Test.objects.all():
-                element = TestsList(test=test, user=User.objects.get(username=username))
+                element = TestsList(test=test, user=User
+                                    .objects
+                                    .get(username=username))
                 element.save()
 
             return redirect('home')

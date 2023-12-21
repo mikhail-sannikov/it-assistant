@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'users',
     'core',
-    'user_tests'
+    'user_tests',
+    'learning',
 ]
 
 MIDDLEWARE = [

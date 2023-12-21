@@ -11,14 +11,14 @@ class Questions(models.Model):
                                      related_name='question_variants')
 
     def __str__(self):
-        return f'{self.question}'
+        return self.question
 
 
 class Variant(models.Model):
     variant = models.TextField()
 
     def __str__(self):
-        return f'{self.variant}'
+        return self.variant
 
 
 class Test(models.Model):
@@ -27,7 +27,7 @@ class Test(models.Model):
                                       related_name='test_questions')
 
     def __str__(self):
-        return f'{self.title}'
+        return self.title
 
 
 class TestsList(models.Model):
@@ -36,7 +36,7 @@ class TestsList(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.test}'
+        return self.test
 
 
 class Answer(models.Model):
@@ -45,4 +45,4 @@ class Answer(models.Model):
     right = models.BooleanField()
 
     def __str__(self):
-        return f'{self.answer}'
+        return self.answer
