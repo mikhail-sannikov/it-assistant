@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <h3>Темы</h3>
+    <hr>
+    
+    <ol>
+        {% for name in object_list %}
+            <li>
+                <p><a href="{% url 'object' name %}">{{ name }}</a></p>
+            </li>
+        {% endfor %}
+    </ol>
+{% endblock %}

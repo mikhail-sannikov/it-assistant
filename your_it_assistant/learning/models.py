@@ -9,11 +9,14 @@ class Object(models.Model):
         return self.name
 
 
-class ThemeList(models.Model):
+class Theme(models.Model):
     theme = models.CharField(max_length=40)
     passed_theme = models.BooleanField(default=0)
-    summary = models.TextField(null=True)
-    reference_data = models.ManyToManyField('EducationalResource')
+
+
+class ThemeList(models.Model):
+    theme = models.CharField(max_length=40)
+    educational_data = models.ManyToManyField('EducationalResource')
 
     def __str__(self):
         return self.theme
@@ -21,6 +24,7 @@ class ThemeList(models.Model):
 
 class EducationalResource(models.Model):
     reference = models.CharField(max_length=200)
+    summary = models.TextField(null=True)
 
     def __str__(self):
         return self.reference
