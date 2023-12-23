@@ -6,9 +6,15 @@
     <hr>
     
     <ol>
-        {% for name in object_list %}
+        {% for theme in object_list %}
             <li>
-                <p><a href="{% url 'object' name %}">{{ name }}</a></p>
+                <a href="{% url 'theme' object theme %}">{{ theme }}</a>
+                {% if theme.passed_theme %}
+                    ☑️
+                {% else %}
+                    ❌
+                {% endif %}
+                <hr>
             </li>
         {% endfor %}
     </ol>

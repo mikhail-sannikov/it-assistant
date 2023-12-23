@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <br>
     <h2>Список оценок</h2>
+    <hr>
     <ol>
         {% for object in object_list %}
             <li>
@@ -9,4 +11,20 @@
             </li>
         {% endfor %}
     </ol>
+    <hr>
+    <br>
+
+    {% if is_active != 0 %}
+        <h2>Список изучаемых материалов</h2>
+        <hr>
+        <ol>
+        {% for item in active_data %}
+            {% if item.progress > 0 %}
+                <li>
+                    {{ item.name }} {{ item.progress }}%
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+    {% endif %}
 {% endblock %}

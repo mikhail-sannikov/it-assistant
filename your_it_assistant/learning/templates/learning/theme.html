@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+    <br>
+
+    {% if resources_count != 0 %}
+        <h3>Материалы по теме</h3>
+        <hr>
+        <ol>
+            {% for theme in resources %}
+                <li>
+                    <p><a href="{{ theme }}" target="_blank">{{ theme }}</a></p>
+                </li>
+            {% endfor %}
+        </ol>
+        <hr>
+        <br>
+    {% endif %}
+
+    <h3>Конспект</h3>
+    <hr>
+    {% if summary != None %}
+        {{ summary|linebreaks }}
+    {% endif %}
+    <hr>
+    <br>
+
+    <h3>Дополнить конспект</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.summary }}
+        <br>
+        <input type="submit" value="Сохранить">
+        <hr>
+        <br>
+
+        <h3>Отметить статус прохождения темы</h3>
+        {{ form.passed_theme }}
+        <br>
+        <br>
+        <input type="submit" value="Обновить">
+    </form>
+    <br>
+    <br>
+{% endblock %}

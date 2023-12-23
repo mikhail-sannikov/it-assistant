@@ -5,6 +5,7 @@ from django.views import View, generic
 from users.forms import UserCreationForm
 
 from user_tests.models import Test, TestsList
+from learning.models import Object
 from .models import User
 
 
@@ -51,3 +52,11 @@ class Profile(generic.ListView):
     def get_queryset(self):
         queryset = TestsList.objects.filter(user=self.request.user)
         return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['is_active'] = Object.objects.filter(is_active=True).count()
+        context['active_data'] = Object.objects.all()
+
+        return context
