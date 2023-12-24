@@ -8,7 +8,7 @@
     <ol>
         {% for theme in object_list %}
             <li>
-                <a href="{% url 'theme' object theme %}">{{ theme }}</a>
+                <a href="{% url 'theme' object theme.theme %}">{{ theme.theme }}</a>
                 {% if theme.passed_theme %}
                     ☑️
                 {% else %}

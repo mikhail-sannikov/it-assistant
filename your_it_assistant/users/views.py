@@ -5,7 +5,7 @@ from django.views import View, generic
 from users.forms import UserCreationForm
 
 from user_tests.models import Test, TestsList
-from learning.models import Object
+from learning.models import UserObjectData, UserThemeData, Object, Theme
 from .models import User
 
 
@@ -30,10 +30,24 @@ class Register(View):
             user = authenticate(username=username, password=password)
             login(request, user)
 
-            for test in Test.objects.all():
-                element = TestsList(test=test, user=User
-                                    .objects
+            for test in Test.objects.all():  # создаем тесты в БД
+                element = TestsList(test=test,
+                                    user=User.objects
                                     .get(username=username))
+                element.save()
+
+            for obj in Object.objects.all():
+                element = UserObjectData(is_active=0,
+                                         object=obj,
+                                         user=User.objects
+                                         .get(username=username))
+                element.save()
+
+            for item in UserThemeData.objects.all():
+                element = UserThemeData(object=item.object,
+                                        theme=item.theme,
+                                        user=User.objects.
+                                        get(username=username))
                 element.save()
 
             return redirect('home')
@@ -56,7 +70,12 @@ class Profile(generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['is_active'] = Object.objects.filter(is_active=True).count()
-        context['active_data'] = Object.objects.all()
+        context['is_active'] = (UserObjectData.objects
+                                .filter(user=self.request.user,
+                                        is_active=True)
+                                .count())
+
+        context['active_data'] = (UserObjectData.objects
+                                  .filter(user=self.request.user))
 
         return context
