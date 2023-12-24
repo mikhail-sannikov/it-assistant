@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>Результат тестирования: {{grade}}%</h1>
-    <br>
+    <hr>
     {% if wrongs_counter == 0 %}
         <h3>Поздравляю! Тест пройдет без ошибок 👍</h3>
     {% elif wrongs_counter > 0 %}
@@ -22,9 +22,15 @@
         </ol>
     {% endif %}
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        <input name="title" type="hidden" value="{{ got_title }}">
-        <button name="finish">Завершить тест</button>
-    </form>
+    {% if user.is_authenticated %}
+        <hr>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input name="title" type="hidden" value="{{ got_title }}">
+            <button name="finish">Сохранить результат</button>
+        </form>
+    {% else %}
+        <hr>
+        Чтобы сохранить результат нужна авторизация
+    {% endif %}
 {% endblock %}

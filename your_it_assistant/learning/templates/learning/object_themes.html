@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <h3>Темы</h3>
+    <hr>
+    
+    <ol>
+        {% for theme in object_list %}
+            <li>
+                <a href="{% url 'theme' object theme.theme %}">{{ theme.theme }}</a>
+                {% if theme.passed_theme %}
+                    ☑️
+                {% else %}
+                    ❌
+                {% endif %}
+                <hr>
+            </li>
+        {% endfor %}
+    </ol>
+{% endblock %}
