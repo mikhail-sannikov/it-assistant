@@ -16,9 +16,9 @@ class ThemesList(ListView):
     template_name = 'learning/object_themes.html'
 
     def get_queryset(self):
-        object = Object.objects.get(object=self.kwargs['learning_str'])
+        obj = Object.objects.get(object=self.kwargs['learning_str'])
         return self.model.objects.filter(user=self.request.user,
-                                         object=object)
+                                         object=obj)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
