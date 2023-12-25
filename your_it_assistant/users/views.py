@@ -43,7 +43,9 @@ class Register(View):
                                          .get(username=username))
                 element.save()
 
-            for item in UserThemeData.objects.all():
+            first_user = User.objects.first()
+
+            for item in UserThemeData.objects.filter(user=first_user):
                 element = UserThemeData(object=item.object,
                                         theme=item.theme,
                                         user=User.objects.
