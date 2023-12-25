@@ -21,7 +21,7 @@
         {% for item in active_data %}
             {% if item.progress > 0 %}
                 <li>
-                    {{ item.name }} {{ item.progress }}%
+                    {{ item.object }} {{ item.progress }}%
                 </li>
             {% endif %}
         {% endfor %}
